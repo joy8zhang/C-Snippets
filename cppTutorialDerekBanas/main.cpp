@@ -40,7 +40,7 @@ int main() {
 //
 //    cout << "you win" << endl;
 
-    /** File IO*/ 
+    /** File IO*/
 //    string steveQuote = "blah blah steve";
 //    ofstream writer("stevequote.txt"); // output file stream
 //
@@ -76,7 +76,20 @@ int main() {
 //        cout << endl;
 //        reader.close();
 //    }
-
+    /** Pointers*/
+//    int myAge = 39;
+//    int* agePtr = &myAge;
+//    cout << "Address of pointer" << agePtr << endl;
+//    cout << "Data at memory address " << *agePtr << endl;
+//
+//    int badNums[5] = {4, 13, 14, 23, 156};
+//    int* numArrayPtr = badNums;
+//    cout << "Address of Array " << numArrayPtr << "Value at " << *numArrayPtr << endl;
+//    numArrayPtr++;
+//    cout << "Address of Array " << numArrayPtr << "Value at " << *numArrayPtr << endl;
+//    numArrayPtr--;
+//    numArrayPtr--;
+//    cout << "Address of Array " << numArrayPtr << "Value at " << *numArrayPtr << endl;
 
     return 0;
 }
