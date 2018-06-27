@@ -5,6 +5,16 @@
 #include <zconf.h>
 
 using namespace std; // avoid typing std all times
+/** Pointer v.s. References*/
+
+//void makeMeYoung(int* age) {
+//    cout << "I used to be " << *age << endl;
+//    *age = 21;
+//}
+//
+//void actYourAge(int& age) {
+//    age = 39;
+//}
 int main() {
     /** basics and variables*/
 //    cout << "Hello, World!" << endl;
@@ -90,6 +100,23 @@ int main() {
 //    numArrayPtr--;
 //    numArrayPtr--;
 //    cout << "Address of Array " << numArrayPtr << "Value at " << *numArrayPtr << endl;
+
+    /** Pointer v.s. References*/
+    // reference v.s. pointers
+    // use reference whenever you don't need to change the value later/ need to declare variable immediately
+//    int myAge = 39;
+//
+//    makeMeYoung(&myAge);
+//    cout << "I'm " << myAge << "years old now " << endl;
+//
+//    int& ageRef = myAge;
+//    cout << "myAge: " << myAge << endl;
+//    ageRef++;
+//    cout << "myAge: " << myAge << endl;
+//
+//    actYourAge(ageRef);
+//    cout << "myAge: " << myAge << endl;
+//
 
     return 0;
 }
