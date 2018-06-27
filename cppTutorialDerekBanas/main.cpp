@@ -15,7 +15,74 @@ using namespace std; // avoid typing std all times
 //void actYourAge(int& age) {
 //    age = 39;
 //}
+
+/** classes*/
+
+//class Animal {
+//    // Attributes: height, weight (variables)
+//    // Capabilities : run, eat (functions)
+//private:
+//    int height;
+//    int weight;
+//    string name;
+//
+//    static int numOfAnimals;
+//public:
+//    int getHeight() { return height; }
+//    int getWeight() { return weight; }
+//    string getName() { return name; }
+//    void setHeight(int cm) { height = cm; }
+//    void setWeight(int kg) { weight = kg; }
+//    void setName(string n) { name = n; }
+//
+//    void setAll(int, int, string); // prototype
+//    Animal(int, int, string); // constructor
+//    ~Animal(); // destructor
+//    Animal(); // overloading
+//
+//    static int getNumberOfAnimals() {return numOfAnimals; } // static method (to return static variable)
+//    void toString();
+//};
+
+//// declaring things
+//int Animal::numOfAnimals = 0;
+////void Animal::setAll(int height, int weight, string name) {
+////    this -> height = height; // this helps to refer to specfic object height
+////    this -> weight = weight;
+////    this -> name = name;
+////    Animal::numOfAnimals++;
+////}
+//
+//// constructor
+//Animal::Animal(int height, int weight, string name) {
+//    this -> height = height; // this helps to refer to specfic object height
+//    this -> weight = weight;
+//    this -> name = name;
+//    Animal::numOfAnimals++;
+//}
+//
+//// deconstructor
+//Animal::~Animal() {
+//    cout << "Animal " << this -> name << "destroyed" << endl;
+//}
+//
+//void Animal::toString() {
+//    cout << this -> name << "is " << this -> height << "cms tall and " << this -> weight << "kgs in weight " << endl;
+//}
+
 int main() {
+    /** classes*/
+//    Animal fred;
+//    fred.setHeight(24);
+//    fred.setWeight(15);
+//    fred.setName("Fred");
+//
+//    fred.toString();
+//
+//    // with consturctor
+//    Animal tom(42, 123, "Tom");
+//    tom.toString();
+
     /** basics and variables*/
 //    cout << "Hello, World!" << endl;
 //
