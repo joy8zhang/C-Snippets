@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/DesignPattern.dir/main.cpp.o CMakeFiles/DesignPattern.dir/Observer.cpp.o CMakeFiles/DesignPattern.dir/Subject.cpp.o CMakeFiles/DesignPattern.dir/DivObserver.cpp.o  -o DesignPattern 

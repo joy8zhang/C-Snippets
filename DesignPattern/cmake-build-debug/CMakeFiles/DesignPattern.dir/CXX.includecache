@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/DivObserver.cpp
+DivObserver.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/DivObserver.h
+iostream
+-
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/DivObserver.h
+Subject.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Subject.h
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Observer.cpp
+Observer.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Observer.h
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Observer.h
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Subject.cpp
+Subject.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Subject.h
+Observer.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Observer.h
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Subject.h
+Observer.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/Observer.h
+iostream
+-
+
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/main.cpp
+iostream
+-
+DivObserver.h
+/Users/JoySenpai/Desktop/Git/C-Snippets/DesignPattern/DivObserver.h
+
