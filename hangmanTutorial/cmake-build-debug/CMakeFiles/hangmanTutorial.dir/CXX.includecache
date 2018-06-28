@@ -9,4 +9,10 @@
 /Users/JoySenpai/Desktop/Git/C-Snippets/hangmanTutorial/main.cpp
 iostream
 -
+vector
+-
+fstream
+-
+string
+-
 

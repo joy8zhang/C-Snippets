@@ -195,6 +195,9 @@ hangmanTutorial_BINARY_DIR:STATIC=/Users/JoySenpai/Desktop/Git/C-Snippets/hangma
 //Value Computed by CMake
 hangmanTutorial_SOURCE_DIR:STATIC=/Users/JoySenpai/Desktop/Git/C-Snippets/hangmanTutorial
 
+//Dependencies for target
+hangmanWords_LIB_DEPENDS:STATIC=
+
 
 ########################
 # INTERNAL cache entries

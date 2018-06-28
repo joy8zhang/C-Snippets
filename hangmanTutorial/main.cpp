@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
 
 /** Tutorial:https://www.youtube.com/watch?v=VWUhXnq_qKI*/
 using namespace std;
@@ -89,7 +92,7 @@ void printAvailableLetters(string taken){
     printLetters(taken, 'A', 'M');
     printLetters(taken, 'N', 'Z');
 }
-
+/** Guess the Word*/
 bool printWordAndCheckWin(string word, string guessed){
     bool won = true;
     string s;
@@ -106,8 +109,28 @@ bool printWordAndCheckWin(string word, string guessed){
     return won;
 }
 
+string loadRandomWord(string path){
+    int lineCount = 0;
+    string word;
+    vector<string> v;
+    ifstream reader("words.txt");
+    if(reader.is_open()){
+        while(std::getline(reader, word))
+            cout << word << endl;
+            // v.push_back(word); // store list of words in vector
+        int randomLine = rand() % v.size();
+        word = v.at(randomLine);
+        reader.close();
+    }
+    cout << v.size();
+}
 int main() {
     string guesses = "FSFAJG";
+
+    string wordToGuess;
+    wordToGuess = loadRandomWord("words.txt");
+    cout << wordToGuess << endl << endl;
+
     printMessage("HANG MAN");
     drawHangman(6);
     printAvailableLetters(guesses);
