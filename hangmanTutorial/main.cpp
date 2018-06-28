@@ -3,11 +3,13 @@
 /** Tutorial:https://www.youtube.com/watch?v=VWUhXnq_qKI*/
 using namespace std;
 
-/** print the outline of the game*/
-void PrintMessage(string message, bool printTop = true, bool printBottom = true) {
+/** game header*/
+void printMessage(string message, bool printTop = true, bool printBottom = true) {
     // top border
     if(printTop) {
         cout << "+---------------------------------+" << endl;
+        cout << "|";
+    }else {
         cout << "|";
     }
     bool front = true;
@@ -28,11 +30,48 @@ void PrintMessage(string message, bool printTop = true, bool printBottom = true)
     if(printBottom) {
         cout << "|" << endl; // this gets pushed to the right because of the message printed
         cout << "+---------------------------------+" << endl;
+    }else {
+        cout << "|" << endl;
     }
 
 }
+// any way to simplify this code?
+// potentially use a data structure, array, hashset to store number and will return blank if number reoccuring
+// this hangman is being reprinted every time, not being saved or anything
+void drawHangman(int guessCount = 0) {
+    if (guessCount >= 1)
+        printMessage("|", false, false);
+    else
+    if (guessCount >= 2)
+        printMessage("|", false, false);
+    else
+        printMessage("", false, false);
+    if (guessCount >= 3)
+        printMessage("o", false, false);
+    else
+        printMessage("", false, false);
+    if (guessCount == 4)
+        printMessage("/  ", false, false); // interesting way to draw the hangman
+    if (guessCount == 5)
+        printMessage("/|  ", false, false); // extra spacing needed for centering
+    if (guessCount >= 6)
+        printMessage("/|\\", false, false);
+    else
+        printMessage("", false, false);
+    if (guessCount >= 7)
+        printMessage("|", false, false);
+    else
+        printMessage("", false, false);
+    if (guessCount == 8)
+        printMessage("/  ", false, false);
+    if (guessCount >= 9)
+        printMessage("/ \\", false, false);
+    else
+        printMessage("", false, false);
+}
 int main() {
-    PrintMessage("HANG MAN");
+    printMessage("HANG MAN");
+    drawHangman(6);
     getchar(); // gets a character from stdin
     return 0;
 }
