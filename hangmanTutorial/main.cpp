@@ -136,17 +136,37 @@ int triesLeft(string word, string guessed){
 
 int main() {
     srand(time(0)); // to randomize the seed/ initialize random generator
-    string guesses = "FSFAJG";
+    string guesses;
 
     string wordToGuess;
     wordToGuess = loadRandomWord("words.txt");
-    cout << wordToGuess << endl << endl;
+    int tries = 0;
+    bool win = false;
+    do{
+        system("clear"); // clear screen
+        printMessage("HANGMAN");
+        drawHangman(tries);
+        printAvailableLetters(guesses);
+        printMessage("Guess the Word");
+        win = printWordAndCheckWin(wordToGuess, guesses);
 
-    printMessage("HANG MAN");
-    drawHangman(6);
-    printAvailableLetters(guesses);
-    printMessage("Guess the Word");
-    printWordAndCheckWin("ALEXES", guesses);
-    getchar(); // gets a character from stdin
+        if(win)
+            break;
+        char x;
+        cout << ">";
+        cin >> x;
+
+        if(guesses.find(x) == string::npos){
+            guesses += x;
+        }
+        tries = triesLeft(wordToGuess, guesses);
+
+    }while(tries < 10);
+
+    if(win)
+        printMessage("YOU WON");
+    else
+        printMessage("GAME OVER");
+    //getchar(); // gets a character from stdin
     return 0;
 }
