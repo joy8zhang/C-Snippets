@@ -1,0 +1,3 @@
+/Users/JoySenpai/Desktop/Git/C-Snippets/hangmanTutorial/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/JoySenpai/Desktop/Git/C-Snippets/hangmanTutorial/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/JoySenpai/Desktop/Git/C-Snippets/hangmanTutorial/cmake-build-debug/CMakeFiles/hangmanTutorial.dir
