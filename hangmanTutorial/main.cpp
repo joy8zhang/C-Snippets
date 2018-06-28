@@ -2,7 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <string>
-
+#include <time.h>
 /** Tutorial:https://www.youtube.com/watch?v=VWUhXnq_qKI*/
 using namespace std;
 
@@ -124,7 +124,18 @@ string loadRandomWord(string path){
     }
     return word;
 }
+
+int triesLeft(string word, string guessed){
+    int error = 0;
+    for(int i = 0; i < guessed.length(); i++){
+        if(word.find(guessed[i]) == string::npos)
+            error++;
+    }
+    return error;
+}
+
 int main() {
+    srand(time(0)); // to randomize the seed/ initialize random generator
     string guesses = "FSFAJG";
 
     string wordToGuess;
