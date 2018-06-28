@@ -83,10 +83,24 @@ void printDigits(int input, int from, int to){
     }
     printMessage(s, false, false);
 }
+
+void printSymbols(){
+    string symbol;
+    symbol += "+  ";
+    symbol += "-  ";
+    symbol += "x  ";
+    symbol += "/  ";
+
+    printMessage(symbol, false, false);
+}
 /** blanks out incorrect digits guessed*/
 void printAvailableDigits(int taken){
     printMessage("Available Digits");
     printDigits(taken, 0, 9);
+}
+
+bool printIntandCheckWin(int number1, int number2, int number3, char guessed){
+
 }
 
 
@@ -94,5 +108,6 @@ int main() {
     printMessage("HANGMAN");
     // printDigits(134, 0, 9);
     printAvailableDigits(154);
+    printSymbols();
     return 0;
 }
