@@ -5,6 +5,38 @@
 #include <zconf.h>
 
 using namespace std; // avoid typing std all times
+
+/** virtual*/
+
+class Animal {
+public:
+    void getFamily() {
+        cout << "We are animals" << endl;
+    }
+    virtual void getClass() { cout << "I'm an Animal" << endl; }
+};
+
+class Dog : public Animal {
+public:
+    void getClass() { cout << "I'm a Dog" << endl;}
+};
+
+void whatClassAreYou(Animal *animal) {
+    animal -> getClass();
+
+}
+
+int main() {
+    Animal *animal = new Animal;
+    Dog *dog = new Dog;
+
+    animal->getClass();
+    dog->getClass();
+
+    whatClassAreYou(animal);
+    whatClassAreYou(dog);
+
+}
 /** Pointer v.s. References*/
 
 //void makeMeYoung(int* age) {
@@ -70,7 +102,7 @@ using namespace std; // avoid typing std all times
 //    cout << this -> name << "is " << this -> height << "cms tall and " << this -> weight << "kgs in weight " << endl;
 //}
 
-int main() {
+//int main() {
     /** classes*/
 //    Animal fred;
 //    fred.setHeight(24);
@@ -185,5 +217,5 @@ int main() {
 //    cout << "myAge: " << myAge << endl;
 //
 
-    return 0;
-}
+//    return 0;
+//}
