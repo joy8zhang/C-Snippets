@@ -115,14 +115,14 @@ string loadRandomWord(string path){
     vector<string> v;
     ifstream reader("words.txt");
     if(reader.is_open()){
-        while(std::getline(reader, word))
-            cout << word << endl;
-            // v.push_back(word); // store list of words in vector
+        while(getline(reader, word)){
+            v.push_back(word); // store list of words in vector
+        }
         int randomLine = rand() % v.size();
         word = v.at(randomLine);
         reader.close();
     }
-    cout << v.size();
+    return word;
 }
 int main() {
     string guesses = "FSFAJG";
