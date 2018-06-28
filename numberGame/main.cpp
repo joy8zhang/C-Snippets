@@ -83,9 +83,16 @@ void printDigits(int input, int from, int to){
     }
     printMessage(s, false, false);
 }
+/** blanks out incorrect digits guessed*/
+void printAvailableDigits(int taken){
+    printMessage("Available Digits");
+    printDigits(taken, 0, 9);
+}
+
 
 int main() {
     printMessage("HANGMAN");
-    printDigits(134, 0, 9);
+    // printDigits(134, 0, 9);
+    printAvailableDigits(154);
     return 0;
 }
