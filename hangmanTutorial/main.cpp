@@ -69,7 +69,7 @@ void drawHangman(int guessCount = 0) {
     else
         printMessage("", false, false);
 }
-/** Letters guessed and not correct are displayed */
+
 void printLetters(string input, char from, char to){
     string s;
     for(char i = from; i <= to; i++){
@@ -83,13 +83,36 @@ void printLetters(string input, char from, char to){
     printMessage(s, false, false);
 }
 
+/** Letters guessed and not correct are displayed */
+void printAvailableLetters(string taken){
+    printMessage("Available Letters");
+    printLetters(taken, 'A', 'M');
+    printLetters(taken, 'N', 'Z');
+}
+
+bool printWordAndCheckWin(string word, string guessed){
+    bool won = true;
+    string s;
+    for(int i = 0; i < word.length(); i++){
+        if(guessed.find(word[i]) == string::npos){ // if guess a character not in word
+            won = false;
+            s += "_ ";
+        }else {
+            s += word[i];
+            s += " ";
+        }
+    }
+    printMessage(s, false);
+    return won;
+}
 
 int main() {
-    string guesses;
+    string guesses = "FSFAJG";
     printMessage("HANG MAN");
     drawHangman(6);
-    printLetters("AGH", 'A', 'M');
-    printLetters("AGH", 'N', 'Z');
+    printAvailableLetters(guesses);
+    printMessage("Guess the Word");
+    printWordAndCheckWin("ALEXES", guesses);
     getchar(); // gets a character from stdin
     return 0;
 }
