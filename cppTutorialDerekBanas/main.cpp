@@ -6,7 +6,7 @@
 
 using namespace std; // avoid typing std all times
 
-/** virtual*/
+/** virtual methods and inheritance*/
 
 class Animal {
 public:
@@ -26,6 +26,12 @@ void whatClassAreYou(Animal *animal) {
 
 }
 
+class GermanShepard : public Dog {
+public:
+    void getClass() { cout << "I'm a German Shepard << endl";}
+    void getDerived() {cout << "I'm an Animal and Dog << endl";}
+
+};
 int main() {
     Animal *animal = new Animal;
     Dog *dog = new Dog;
@@ -35,6 +41,15 @@ int main() {
 
     whatClassAreYou(animal);
     whatClassAreYou(dog);
+
+    Dog spot;
+    GermanShepard max;
+
+    Animal* ptrDog = &spot;
+    Animal* ptrGShepard = &max;
+
+    ptrDog -> getFamily();
+    ptrDog -> getClass();
 
 }
 /** Pointer v.s. References*/
