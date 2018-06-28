@@ -69,9 +69,27 @@ void drawHangman(int guessCount = 0) {
     else
         printMessage("", false, false);
 }
+/** Letters guessed and not correct are displayed */
+void printLetters(string input, char from, char to){
+    string s;
+    for(char i = from; i <= to; i++){
+        if(input.find(i) == string::npos) { // npos is end of string, if input did not contain i
+            s += i; // add the character
+            s += " ";
+        }
+        else
+            s += "  ";
+    }
+    printMessage(s, false, false);
+}
+
+
 int main() {
+    string guesses;
     printMessage("HANG MAN");
     drawHangman(6);
+    printLetters("AGH", 'A', 'M');
+    printLetters("AGH", 'N', 'Z');
     getchar(); // gets a character from stdin
     return 0;
 }
