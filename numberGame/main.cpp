@@ -61,10 +61,11 @@ void drawHangman(int guessCount = 0) {
     else
         printMessage("", false, false);
 }
-bool findDigit(int input, int i){
+
+bool findDigit(int input, char i){
     while(input > 0){
         int digit = input % 10;
-        if(digit==i) return true;
+        if(digit == i-'0') return true;
         input/=10;
 
     }
@@ -99,8 +100,15 @@ void printAvailableDigits(int taken){
     printDigits(taken, 0, 9);
 }
 
-bool printIntandCheckWin(int number1, int number2, int number3, char guessed){
-
+int triesLeft(int num1, int num2, int numTotal, string guessedNumber, char guessedSymbol){
+    int error = 0;
+    cout << "length " << guessedNumber.length() << endl;
+    for(int i = 0; i < guessedNumber.length(); i++){
+        cout << "num1 " << num1 << "digit " << guessedNumber[i] << endl;
+        cout << findDigit(num1, (int)guessedNumber[i]);
+    }
+    //cout << error;
+    return error;
 }
 
 
@@ -109,5 +117,7 @@ int main() {
     // printDigits(134, 0, 9);
     printAvailableDigits(154);
     printSymbols();
+    triesLeft(1,0,0,"1", 'x');
+    cout << "look here " << findDigit(12, '4');
     return 0;
 }
