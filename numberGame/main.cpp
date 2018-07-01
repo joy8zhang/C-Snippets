@@ -100,6 +100,42 @@ void printAvailableDigits(int taken){
     printDigits(taken, 0, 9);
 }
 
+bool printNumbersSymbolsAndCheckWin(int digit, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
+    bool won = true;
+    string n1, n2, nTotal;
+    for(int i = 0; i < numToGuess1.length(); i++){
+        if(!findDigit(digit,numToGuess1[i])){
+            won = false;
+            n1 += "_  ";
+        }else {
+            n1 += digit;
+            n1 += " ";
+        }
+    }
+    for(int i = 0; i < numToGuess2.length(); i++){
+        if(!findDigit(digit,numToGuess2[i])){
+            won = false;
+            n2 += "_  ";
+        }else {
+            n2 += digit;
+            n2 += " ";
+        }
+    }
+    for(int i = 0; i < numToGuessTotal.length(); i++){
+        if(!findDigit(digit,numToGuessTotal[i])){
+            won = false;
+            nTotal += "_  ";
+        }else {
+            nTotal += digit;
+            nTotal += " ";
+        }
+    }
+    printMessage(n1, false);
+    printMessage(n2, false);
+    printMessage(nTotal, false);
+    return won;
+}
+
 int triesLeft(int digit, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
     bool noError = false;
@@ -124,14 +160,15 @@ int triesLeft(int digit, string numToGuess1, string numToGuess2, string numToGue
     if(!noError)
         error++;
     return error;
+
+    //TODO: symbol guess implementation
 }
 
 
 int main() {
     printMessage("HANGMAN");
-    // printDigits(134, 0, 9);
     printAvailableDigits(154);
     printSymbols();
-    cout << "here " << triesLeft(1, "23", "2", "23", 'x');
+    printNumbersSymbolsAndCheckWin(2, "123", "235", "3642", 'x');
     return 0;
 }
