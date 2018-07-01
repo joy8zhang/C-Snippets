@@ -100,16 +100,28 @@ void printAvailableDigits(int taken){
     printDigits(taken, 0, 9);
 }
 
-int triesLeft(int num1, string guessedNumber, char guessedSymbol){
+int triesLeft(int digit, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
-    bool hasError = true;
-    for(int i = 0; i < guessedNumber.length(); i++){
-        if(findDigit(num1, guessedNumber[i])){
-            hasError = false;
+    bool noError = false;
+    for(int i = 0; i < numToGuess1.length(); i++){
+        if(findDigit(digit,numToGuess1[i])){
+            noError = true;
             break;
         }
     }
-    if(hasError)
+    for(int i = 0; i < numToGuess2.length(); i++){
+        if(findDigit(digit,numToGuess2[i])){
+            noError = noError || true;
+            break;
+        }
+    }
+    for(int i = 0; i < numToGuessTotal.length(); i++){
+        if(findDigit(digit,numToGuessTotal[i])){
+            noError = noError || true;
+            break;
+        }
+    }
+    if(!noError)
         error++;
     return error;
 }
@@ -120,5 +132,6 @@ int main() {
     // printDigits(134, 0, 9);
     printAvailableDigits(154);
     printSymbols();
+    cout << "here " << triesLeft(1, "23", "2", "23", 'x');
     return 0;
 }
