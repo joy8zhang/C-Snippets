@@ -62,11 +62,12 @@ void drawHangman(int guessCount = 0) {
         printMessage("", false, false);
 }
 
-bool findDigit(int input, char i){
-    while(input > 0){
-        int digit = input % 10;
+bool findDigit(char input, char i){
+    int inputInt = input - '0';
+    while(inputInt > 0){
+        int digit = inputInt % 10;
         if(digit == i-'0') return true;
-        input/=10;
+        inputInt/=10;
 
     }
     return false;
@@ -136,25 +137,43 @@ bool printNumbersSymbolsAndCheckWin(int digit, string numToGuess1, string numToG
     return won;
 }
 
-int triesLeft(int digit, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
+int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
     bool noError = false;
     for(int i = 0; i < numToGuess1.length(); i++){
-        if(findDigit(digit,numToGuess1[i])){
-            noError = true;
-            break;
+        if(guess-'0' <=9){
+            if(findDigit(guess,numToGuess1[i])){
+                noError = true;
+                break;
+            }
+        }else {
+            if(guess == symbolToGuess){
+                noError = true;
+                break;
+            }
         }
+
     }
     for(int i = 0; i < numToGuess2.length(); i++){
-        if(findDigit(digit,numToGuess2[i])){
-            noError = noError || true;
-            break;
+        if(guess-'0' <=9) {
+            if (findDigit(guess, numToGuess2[i])) {
+                noError = noError || true;
+                break;
+            }
+        }else {
+            if(guess == symbolToGuess)
+                noError = noError || true;
         }
     }
     for(int i = 0; i < numToGuessTotal.length(); i++){
-        if(findDigit(digit,numToGuessTotal[i])){
-            noError = noError || true;
-            break;
+        if(guess-'0' <=9) {
+            if (findDigit(guess, numToGuessTotal[i])) {
+                noError = noError || true;
+                break;
+            }
+        }else {
+            if(guess == symbolToGuess)
+                noError = noError || true;
         }
     }
     if(!noError)
@@ -170,5 +189,7 @@ int main() {
     printAvailableDigits(154);
     printSymbols();
     printNumbersSymbolsAndCheckWin(2, "123", "235", "3642", 'x');
+    cout << '9'-'0';
+    cout << triesLeft('4',"123","123","123",'x');
     return 0;
 }
