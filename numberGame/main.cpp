@@ -119,33 +119,10 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
                     spaceDigit = false;
                     break;
                 }
-            } else{
-                if (!(guess[j] == symbolToGuess)) {
-                    won = false;
-
-                } else {
-                    nArithmetics += guess[j];
-                    nArithmetics += " ";
-                }
             }
         }
         if(spaceDigit)
             n1 += "_ ";
-    }
-
-    for(int j = 0; j < strlen(guess); j++){
-        if(!guess[j] - '0' <= 9){
-            if (!(guess[j] == symbolToGuess)) {
-                won = false;
-                nArithmetics += "_  ";
-
-            } else {
-                nArithmetics += guess[j];
-                nArithmetics += " ";
-                won = true;
-                break;
-            }
-        }
     }
     for (int i = 0; i < numToGuess2.length(); i++) {
         for(int j = 0; j < strlen(guess); j++) {
@@ -158,14 +135,6 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
                     n2 += " ";
                     spaceDigit = false;
                     break;
-                }
-            } else{
-                if (!(guess[j] == symbolToGuess)) {
-                    won = false;
-                    nArithmetics += "_  ";
-                } else {
-                    nArithmetics += guess[j];
-                    nArithmetics += " ";
                 }
             }
         }
@@ -186,21 +155,28 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
                     spaceDigit = false;
                     break;
                 }
-            }else {
-                if (!(guess[j] == symbolToGuess)) {
-                    won = false;
-                    nArithmetics += "_  ";
-                } else {
-                    nArithmetics += guess[j];
-                    nArithmetics += " ";
-                }
             }
         }
         if(spaceDigit)
             nTotal += "_ ";
-        if(spaceSymbol)
-            nArithmetics += "_  ";
     }
+    for(int j = 0; j < strlen(guess); j++) {
+        if (!guess[j] - '0' <= 9) {
+            if (!(guess[j] == symbolToGuess)) {
+                won = false;
+                spaceSymbol = true;
+
+            } else {
+                nArithmetics += guess[j];
+                nArithmetics += " ";
+                spaceSymbol = false;
+                won = true;
+                break;
+            }
+        }
+    }
+    if(spaceSymbol)
+        nArithmetics += "_ ";
 
 
     printMessage(n1, false);
@@ -287,7 +263,7 @@ int calculateTotal(int num1, int num2, char symbol){
 
 int main() {
     char guesses[10];
-    char temp[] = {'1','2'};
+    char temp[] = {'1','2', 'x'};
 
     string numToGuess1, numToGuess2, numtoGuessTotal;
     char symbolToGuess;
