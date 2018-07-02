@@ -104,70 +104,102 @@ void printAvailableDigits(char taken[]){
 bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess) {
     bool won = true;
     bool symbolGuessed = false;
+    bool spaceDigit = false;
+    bool spaceSymbol = false;
     string n1, n2, nArithmetics, nTotal;
     for (int i = 0; i < numToGuess1.length(); i++) {
         for(int j = 0; j < strlen(guess); j++){
             if (guess[j] - '0' <= 9) {
                 if (!findDigit(guess[j], numToGuess1[i])) {
                     won = false;
-                    n1 += "_  ";
+                    spaceDigit = true;
                 } else {
-                    n1 += guess;
+                    n1 += guess[j];
                     n1 += " ";
+                    spaceDigit = false;
+                    break;
                 }
             } else{
                 if (!(guess[j] == symbolToGuess)) {
                     won = false;
-                    nArithmetics += "_  ";
+
                 } else {
-                    nArithmetics += guess;
+                    nArithmetics += guess[j];
                     nArithmetics += " ";
                 }
             }
         }
+        if(spaceDigit)
+            n1 += "_ ";
+    }
 
+    for(int j = 0; j < strlen(guess); j++){
+        if(!guess[j] - '0' <= 9){
+            if (!(guess[j] == symbolToGuess)) {
+                won = false;
+                nArithmetics += "_  ";
+
+            } else {
+                nArithmetics += guess[j];
+                nArithmetics += " ";
+                won = true;
+                break;
+            }
+        }
     }
     for (int i = 0; i < numToGuess2.length(); i++) {
         for(int j = 0; j < strlen(guess); j++) {
             if (guess[j] - '0' <= 9) {
                 if (!findDigit(guess[j], numToGuess2[i])) {
                     won = false;
-                    n2 += "_  ";
+                    spaceDigit = true;
                 } else {
-                    n2 += guess;
+                    n2 += guess[j];
                     n2 += " ";
+                    spaceDigit = false;
+                    break;
                 }
             } else{
                 if (!(guess[j] == symbolToGuess)) {
                     won = false;
                     nArithmetics += "_  ";
                 } else {
-                    nArithmetics += guess;
+                    nArithmetics += guess[j];
                     nArithmetics += " ";
                 }
             }
         }
+        if(spaceDigit)
+            n2 += "_ ";
+        if(spaceSymbol)
+            nArithmetics += "_  ";
     }
     for (int i = 0; i < numToGuessTotal.length(); i++) {
         for(int j = 0; j < strlen(guess); j++) {
             if (guess[j] - '0' <= 9) {
                 if (!findDigit(guess[j], numToGuessTotal[i])) {
                     won = false;
-                    nTotal += "_  ";
+                    spaceDigit = true;
                 } else {
-                    nTotal += guess;
+                    nTotal += guess[j];
                     nTotal += " ";
+                    spaceDigit = false;
+                    break;
                 }
             }else {
                 if (!(guess[j] == symbolToGuess)) {
                     won = false;
                     nArithmetics += "_  ";
                 } else {
-                    nArithmetics += guess;
+                    nArithmetics += guess[j];
                     nArithmetics += " ";
                 }
             }
         }
+        if(spaceDigit)
+            nTotal += "_ ";
+        if(spaceSymbol)
+            nArithmetics += "_  ";
     }
 
 
@@ -255,6 +287,7 @@ int calculateTotal(int num1, int num2, char symbol){
 
 int main() {
     char guesses[10];
+    char temp[] = {'1','2'};
 
     string numToGuess1, numToGuess2, numtoGuessTotal;
     char symbolToGuess;
@@ -271,7 +304,8 @@ int main() {
         printAvailableDigits(guesses);
         printMessage("Guess the Math");
         printSymbols();
-        win = printNumbersSymbolsAndCheckWin(guesses, numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+        //win = printNumbersSymbolsAndCheckWin(guesses, numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+        win = printNumbersSymbolsAndCheckWin(temp, "123", "2", "125", 'x');
 
         if(win)
             break;
@@ -288,6 +322,7 @@ int main() {
         printMessage("YOU WON");
     else
         printMessage("GAME OVER");
+
 
     return 0;
 }
