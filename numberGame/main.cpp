@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 void printMessage(string message, bool printTop = true, bool printBottom = true) {
     // top border
@@ -73,10 +75,10 @@ bool findDigit(char input, char i){
 
 }
 
-void printDigits(int input, int from, int to){
+void printDigits(char input[], int from, int to){
     string s;
     for(int i = from; i <= to; i++){
-        if(!findDigit(input, i)){
+        if(!strchr(input, i)){
             s += to_string(i);
             s += " ";
         }else
@@ -94,55 +96,80 @@ void printSymbols(){
     printMessage(symbol, false, false);
 }
 /** blanks out incorrect digits guessed*/
-void printAvailableDigits(int taken){
+void printAvailableDigits(char taken[]){
     printMessage("Available Digits");
     printDigits(taken, 0, 9);
 }
 
-bool printNumbersSymbolsAndCheckWin(char guess, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess) {
+bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess) {
     bool won = true;
     bool symbolGuessed = false;
     string n1, n2, nArithmetics, nTotal;
     for (int i = 0; i < numToGuess1.length(); i++) {
-        if (guess - '0' <= 9) {
-            if (!findDigit(guess, numToGuess1[i])) {
-                won = false;
-                n1 += "_  ";
-            } else {
-                n1 += guess;
-                n1 += " ";
+        for(int j = 0; j < strlen(guess); j++){
+            if (guess[j] - '0' <= 9) {
+                if (!findDigit(guess[j], numToGuess1[i])) {
+                    won = false;
+                    n1 += "_  ";
+                } else {
+                    n1 += guess;
+                    n1 += " ";
+                }
+            } else{
+                if (!(guess[j] == symbolToGuess)) {
+                    won = false;
+                    nArithmetics += "_  ";
+                } else {
+                    nArithmetics += guess;
+                    nArithmetics += " ";
+                }
             }
-        } else break;
+        }
+
     }
     for (int i = 0; i < numToGuess2.length(); i++) {
-        if (guess - '0' <= 9) {
-            if (!findDigit(guess, numToGuess2[i])) {
-                won = false;
-                n2 += "_  ";
-            } else {
-                n2 += guess;
-                n2 += " ";
+        for(int j = 0; j < strlen(guess); j++) {
+            if (guess[j] - '0' <= 9) {
+                if (!findDigit(guess[j], numToGuess2[i])) {
+                    won = false;
+                    n2 += "_  ";
+                } else {
+                    n2 += guess;
+                    n2 += " ";
+                }
+            } else{
+                if (!(guess[j] == symbolToGuess)) {
+                    won = false;
+                    nArithmetics += "_  ";
+                } else {
+                    nArithmetics += guess;
+                    nArithmetics += " ";
+                }
             }
-        } else break;
+        }
     }
     for (int i = 0; i < numToGuessTotal.length(); i++) {
-        if (guess - '0' <= 9) {
-            if (!findDigit(guess, numToGuessTotal[i])) {
-                won = false;
-                nTotal += "_  ";
-            } else {
-                nTotal += guess;
-                nTotal += " ";
+        for(int j = 0; j < strlen(guess); j++) {
+            if (guess[j] - '0' <= 9) {
+                if (!findDigit(guess[j], numToGuessTotal[i])) {
+                    won = false;
+                    nTotal += "_  ";
+                } else {
+                    nTotal += guess;
+                    nTotal += " ";
+                }
+            }else {
+                if (!(guess[j] == symbolToGuess)) {
+                    won = false;
+                    nArithmetics += "_  ";
+                } else {
+                    nArithmetics += guess;
+                    nArithmetics += " ";
+                }
             }
-        } else break;
+        }
     }
-    if (!(guess == symbolToGuess)) {
-        won = false;
-        nArithmetics += "_  ";
-    } else {
-        nArithmetics += guess;
-        nArithmetics += " ";
-    }
+
 
     printMessage(n1, false);
     printMessage(n2, false);
@@ -151,36 +178,53 @@ bool printNumbersSymbolsAndCheckWin(char guess, string numToGuess1, string numTo
     return won;
 }
 
-int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
+int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
     bool noError = false;
     for(int i = 0; i < numToGuess1.length(); i++){
-        if(guess-'0' <=9){
-            if(findDigit(guess,numToGuess1[i])){
-                noError = true;
-                break;
+        for(int j = 0; j < strlen(guess); j++) {
+            if (guess[j] - '0' <= 9) {
+                if (findDigit(guess[j], numToGuess1[i])) {
+                    noError = true;
+                    break;
+                }
+            } else {
+                if(guess[j] == symbolToGuess)
+                    noError = true;
+                else break;
             }
-        }else break;
+        }
 
     }
     for(int i = 0; i < numToGuess2.length(); i++){
-        if(guess-'0' <=9) {
-            if (findDigit(guess, numToGuess2[i])) {
-                noError = noError || true;
-                break;
+        for(int j = 0; j < strlen(guess); j++) {
+            if (guess[j] - '0' <= 9) {
+                if (findDigit(guess[j], numToGuess2[i])) {
+                    noError = noError || true;
+                    break;
+                }
+            } else {
+                if(guess[j] == symbolToGuess)
+                    noError = noError || true;
+                else break;
             }
-        }else break;
+        }
     }
     for(int i = 0; i < numToGuessTotal.length(); i++){
-        if(guess-'0' <=9) {
-            if (findDigit(guess, numToGuessTotal[i])) {
-                noError = noError || true;
-                break;
+        for(int j = 0; j < strlen(guess); j++) {
+            if (guess[j] - '0' <= 9) {
+                if (findDigit(guess[j], numToGuessTotal[i])) {
+                    noError = noError || true;
+                    break;
+                }
+            } else {
+                if(guess[j] == symbolToGuess)
+                    noError = noError || true;
+                else break;
             }
-        }else break;
+        }
     }
-    if(guess == symbolToGuess)
-        noError = noError || true;
+
     if(!noError)
         error++;
     return error;
@@ -210,12 +254,40 @@ int calculateTotal(int num1, int num2, char symbol){
 // then stick all the information to figure out wins
 
 int main() {
-    printMessage("HANGMAN");
-    printAvailableDigits(154);
-    printMessage("Guess the Math");
-    printSymbols();
-    printNumbersSymbolsAndCheckWin('x', "123", "235", "3642", 'x');
-    cout << triesLeft('5',"123","123","123",'x');
-    cout << "calculates" << calculateTotal(1,4,'-');
+    char guesses[10];
+
+    string numToGuess1, numToGuess2, numtoGuessTotal;
+    char symbolToGuess;
+    numToGuess1 = to_string(123);
+    numToGuess2 = to_string(2);
+    numtoGuessTotal = to_string(calculateTotal(stoi(numToGuess1), stoi(numToGuess2), symbolToGuess));
+
+    int tries = 0;
+    bool win = false;
+    do{
+        system("clear");
+        printMessage("HANGMAN");
+        drawHangman(tries);
+        printAvailableDigits(guesses);
+        printMessage("Guess the Math");
+        printSymbols();
+        win = printNumbersSymbolsAndCheckWin(guesses, numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+
+        if(win)
+            break;
+        char x;
+        cout << ">";
+        cin >> x;
+
+        if(strchr(guesses,x))
+            guesses[tries] = x;
+        tries = triesLeft(guesses, numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+    }while(tries < 10);
+
+    if(win)
+        printMessage("YOU WON");
+    else
+        printMessage("GAME OVER");
+
     return 0;
 }
