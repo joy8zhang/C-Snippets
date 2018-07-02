@@ -91,7 +91,6 @@ void printSymbols(){
     symbol += "-  ";
     symbol += "x  ";
     symbol += "/  ";
-
     printMessage(symbol, false, false);
 }
 /** blanks out incorrect digits guessed*/
@@ -186,14 +185,37 @@ int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGu
         error++;
     return error;
 }
-
+// take two numbers from list
+// take random symbol
+// write calculator that calculates it and produces output of the total
+// minus might be a problem
+int calculateTotal(int num1, int num2, char symbol){
+    int numTotal;
+    switch(symbol){
+        case 'x':
+            numTotal = num1 * num2;
+            break;
+        case '+':
+            numTotal = num1 + num2;
+            break;
+        case '-':
+            numTotal = num1 - num2;
+            break;
+        case '/':
+            numTotal = num1 / num2;
+            break;
+    }
+    return numTotal;
+}
+// then stick all the information to figure out wins
 
 int main() {
     printMessage("HANGMAN");
     printAvailableDigits(154);
+    printMessage("Guess the Math");
     printSymbols();
     printNumbersSymbolsAndCheckWin('x', "123", "235", "3642", 'x');
-    cout << 'x'-'0'<<endl;
-    cout << triesLeft('x',"123","123","123",'x');
+    cout << triesLeft('5',"123","123","123",'x');
+    cout << "calculates" << calculateTotal(1,4,'-');
     return 0;
 }
