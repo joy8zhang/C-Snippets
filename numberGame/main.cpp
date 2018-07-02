@@ -68,7 +68,6 @@ bool findDigit(char input, char i){
         int digit = inputInt % 10;
         if(digit == i-'0') return true;
         inputInt/=10;
-
     }
     return false;
 
@@ -101,38 +100,54 @@ void printAvailableDigits(int taken){
     printDigits(taken, 0, 9);
 }
 
-bool printNumbersSymbolsAndCheckWin(int digit, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
+bool printNumbersSymbolsAndCheckWin(char guess, string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess) {
     bool won = true;
-    string n1, n2, nTotal;
-    for(int i = 0; i < numToGuess1.length(); i++){
-        if(!findDigit(digit,numToGuess1[i])){
-            won = false;
-            n1 += "_  ";
-        }else {
-            n1 += digit;
-            n1 += " ";
-        }
+    bool symbolGuessed = false;
+    string n1, n2, nArithmetics, nTotal;
+    for (int i = 0; i < numToGuess1.length(); i++) {
+        if (guess - '0' <= 9) {
+            if (!findDigit(guess, numToGuess1[i])) {
+                won = false;
+                n1 += "_  ";
+            } else {
+                n1 += guess;
+                n1 += " ";
+            }
+        } else break;
     }
-    for(int i = 0; i < numToGuess2.length(); i++){
-        if(!findDigit(digit,numToGuess2[i])){
-            won = false;
-            n2 += "_  ";
-        }else {
-            n2 += digit;
-            n2 += " ";
-        }
+    for (int i = 0; i < numToGuess2.length(); i++) {
+        if (guess - '0' <= 9) {
+            if (!findDigit(guess, numToGuess2[i])) {
+                won = false;
+                n2 += "_  ";
+            } else {
+                n2 += guess;
+                n2 += " ";
+            }
+        } else break;
     }
-    for(int i = 0; i < numToGuessTotal.length(); i++){
-        if(!findDigit(digit,numToGuessTotal[i])){
-            won = false;
-            nTotal += "_  ";
-        }else {
-            nTotal += digit;
-            nTotal += " ";
-        }
+    for (int i = 0; i < numToGuessTotal.length(); i++) {
+        if (guess - '0' <= 9) {
+            if (!findDigit(guess, numToGuessTotal[i])) {
+                won = false;
+                nTotal += "_  ";
+            } else {
+                nTotal += guess;
+                nTotal += " ";
+            }
+        } else break;
     }
+    if (!(guess == symbolToGuess)) {
+        won = false;
+        nArithmetics += "_  ";
+    } else {
+        nArithmetics += guess;
+        nArithmetics += " ";
+    }
+    
     printMessage(n1, false);
     printMessage(n2, false);
+    printMessage(nArithmetics, false);
     printMessage(nTotal, false);
     return won;
 }
@@ -179,8 +194,6 @@ int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGu
     if(!noError)
         error++;
     return error;
-
-    //TODO: symbol guess implementation
 }
 
 
@@ -188,8 +201,8 @@ int main() {
     printMessage("HANGMAN");
     printAvailableDigits(154);
     printSymbols();
-    printNumbersSymbolsAndCheckWin(2, "123", "235", "3642", 'x');
-    cout << '9'-'0';
-    cout << triesLeft('4',"123","123","123",'x');
+    printNumbersSymbolsAndCheckWin('x', "123", "235", "3642", 'x');
+    cout << 'x'-'0'<<endl;
+    cout << triesLeft('x',"123","123","123",'x');
     return 0;
 }
