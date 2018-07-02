@@ -144,7 +144,7 @@ bool printNumbersSymbolsAndCheckWin(char guess, string numToGuess1, string numTo
         nArithmetics += guess;
         nArithmetics += " ";
     }
-    
+
     printMessage(n1, false);
     printMessage(n2, false);
     printMessage(nArithmetics, false);
@@ -161,12 +161,7 @@ int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGu
                 noError = true;
                 break;
             }
-        }else {
-            if(guess == symbolToGuess){
-                noError = true;
-                break;
-            }
-        }
+        }else break;
 
     }
     for(int i = 0; i < numToGuess2.length(); i++){
@@ -175,10 +170,7 @@ int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGu
                 noError = noError || true;
                 break;
             }
-        }else {
-            if(guess == symbolToGuess)
-                noError = noError || true;
-        }
+        }else break;
     }
     for(int i = 0; i < numToGuessTotal.length(); i++){
         if(guess-'0' <=9) {
@@ -186,11 +178,10 @@ int triesLeft(char guess, string numToGuess1, string numToGuess2, string numToGu
                 noError = noError || true;
                 break;
             }
-        }else {
-            if(guess == symbolToGuess)
-                noError = noError || true;
-        }
+        }else break;
     }
+    if(guess == symbolToGuess)
+        noError = noError || true;
     if(!noError)
         error++;
     return error;
