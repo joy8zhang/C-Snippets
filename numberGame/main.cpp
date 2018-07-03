@@ -198,48 +198,35 @@ int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numTo
     int error = 0;
     bool noError = false;
 
-    for(int i = 0; i < numToGuess1.length(); i++){
-        for(int j = 0; j < strlen(guess); j++) {
-            if (guess[j] - '0' <= 9) {
+    for(int j = 0; j < strlen(guess); j++){
+        if (guess[j] - '0' <= 9) {
+            for (int i = 0; i < numToGuess1.length(); i++) {
                 if (findDigit(guess[j], numToGuess1[i])) {
                     noError = true;
                     break;
-                }
+                } else noError = false;
             }
-        }
-
-    }
-    for(int i = 0; i < numToGuess2.length(); i++){
-        for(int j = 0; j < strlen(guess); j++) {
-            if (guess[j] - '0' <= 9) {
-                if (findDigit(guess[j], numToGuess2[i])) {
-                    noError = noError || true;
+            for (int i = 0; i < numToGuess2.length(); i++) {
+                if (findDigit(guess[j], numToGuess1[i])) {
+                    noError = true;
                     break;
-                }
+                } else noError = noError || false;
             }
-        }
-    }
-    for(int i = 0; i < numToGuessTotal.length(); i++){
-        for(int j = 0; j < strlen(guess); j++) {
-            if (guess[j] - '0' <= 9) {
-                if (findDigit(guess[j], numToGuessTotal[i])) {
-                    noError = noError || true;
+            for (int i = 0; i < numToGuessTotal.length(); i++) {
+                if (findDigit(guess[j], numToGuess1[i])) {
+                    noError = true;
                     break;
-                }
+                } else noError = noError || false;
             }
-        }
-    }
-    for(int j = 0; j < strlen(guess); j++) {
-        if (!guess[j] - '0' <= 9) {
+        }else {
             if (guess[j] == symbolToGuess) {
                 noError = true;
-                break;
-            }
+                break; // wins game
+            }else noError = noError || false;
         }
+        if(!noError)
+            error++;
     }
-
-    if(!noError)
-        error++;
     return error;
 }
 // take two numbers from list
@@ -283,9 +270,7 @@ int main() {
         system("clear");
         printMessage("HANGMAN");
         drawHangman(tries);
-        //printAvailableDigits(&guessVector[0]);
-        //printAvailableDigits("123");
-        printDigits("123",0,9);
+        printAvailableDigits(&guessVector[0]);
 
         printMessage("Guess the Math");
         printSymbols();
