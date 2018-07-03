@@ -4,6 +4,7 @@
 #include <time.h>
 #include <vector>
 using namespace std;
+// To play, run game and start guessing digits. Automatically win the game when you guess the arithmetic symbol for the calculation.
 void printMessage(string message, bool printTop = true, bool printBottom = true) {
     // top border
     if(printTop) {
