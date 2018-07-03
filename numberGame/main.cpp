@@ -78,7 +78,11 @@ bool findDigit(char input, char i){
 void printDigits(char input[], int from, int to){
     string s;
     for(int i = from; i <= to; i++){
-        if(!strchr(input, i)){
+        if(input== nullptr){
+            s += to_string(i);
+            s += " ";
+        }
+        else if(!strchr(input, i)){
             s += to_string(i);
             s += " ";
         }else
@@ -189,6 +193,7 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
 int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
     bool noError = false;
+
     for(int i = 0; i < numToGuess1.length(); i++){
         for(int j = 0; j < strlen(guess); j++) {
             if (guess[j] - '0' <= 9) {
@@ -196,10 +201,6 @@ int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numTo
                     noError = true;
                     break;
                 }
-            } else {
-                if(guess[j] == symbolToGuess)
-                    noError = true;
-                else break;
             }
         }
 
@@ -211,10 +212,6 @@ int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numTo
                     noError = noError || true;
                     break;
                 }
-            } else {
-                if(guess[j] == symbolToGuess)
-                    noError = noError || true;
-                else break;
             }
         }
     }
@@ -225,10 +222,14 @@ int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numTo
                     noError = noError || true;
                     break;
                 }
-            } else {
-                if(guess[j] == symbolToGuess)
-                    noError = noError || true;
-                else break;
+            }
+        }
+    }
+    for(int j = 0; j < strlen(guess); j++) {
+        if (!guess[j] - '0' <= 9) {
+            if (guess[j] == symbolToGuess) {
+                noError = true;
+                break;
             }
         }
     }
@@ -262,11 +263,12 @@ int calculateTotal(int num1, int num2, char symbol){
 // then stick all the information to figure out wins
 
 int main() {
-    char guesses[10];
-    char temp[] = {'1','2', 'x'};
+    char temp[] = "12x";
+    vector<char> guessVector;
+
 
     string numToGuess1, numToGuess2, numtoGuessTotal;
-    char symbolToGuess;
+    char symbolToGuess = 'x';
     numToGuess1 = to_string(123);
     numToGuess2 = to_string(2);
     numtoGuessTotal = to_string(calculateTotal(stoi(numToGuess1), stoi(numToGuess2), symbolToGuess));
@@ -277,11 +279,11 @@ int main() {
         system("clear");
         printMessage("HANGMAN");
         drawHangman(tries);
-        printAvailableDigits(guesses);
+        printAvailableDigits(&guessVector[0]);
         printMessage("Guess the Math");
         printSymbols();
-        //win = printNumbersSymbolsAndCheckWin(guesses, numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
-        win = printNumbersSymbolsAndCheckWin(temp, "123", "2", "125", 'x');
+       // win = printNumbersSymbolsAndCheckWin(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+        win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
 
         if(win)
             break;
@@ -289,15 +291,19 @@ int main() {
         cout << ">";
         cin >> x;
 
-        if(strchr(guesses,x))
-            guesses[tries] = x;
-        tries = triesLeft(guesses, numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+        if(!string(&guessVector[0]).find(x))
+            guessVector.push_back(x);
+        tries = triesLeft(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+
+
     }while(tries < 10);
 
     if(win)
         printMessage("YOU WON");
     else
         printMessage("GAME OVER");
+
+    cout << &guessVector[0] << endl;
 
 
     return 0;
