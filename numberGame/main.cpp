@@ -111,6 +111,10 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
     bool spaceDigit = false;
     bool spaceSymbol = false;
     string n1, n2, nArithmetics, nTotal;
+    if(guess==nullptr){
+        won = false;
+        return won;
+    }
     for (int i = 0; i < numToGuess1.length(); i++) {
         for(int j = 0; j < strlen(guess); j++){
             if (guess[j] - '0' <= 9) {
@@ -283,6 +287,7 @@ int main() {
         printMessage("Guess the Math");
         printSymbols();
        // win = printNumbersSymbolsAndCheckWin(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
+
         win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
 
         if(win)
@@ -290,9 +295,11 @@ int main() {
         char x;
         cout << ">";
         cin >> x;
-
-        if(!string(&guessVector[0]).find(x))
+        if(&guessVector[0] == nullptr)
             guessVector.push_back(x);
+        else if(string(&guessVector[0]).find(x))
+            guessVector.push_back(x);
+
         tries = triesLeft(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
 
 
@@ -302,9 +309,6 @@ int main() {
         printMessage("YOU WON");
     else
         printMessage("GAME OVER");
-
-    cout << &guessVector[0] << endl;
-
 
     return 0;
 }
