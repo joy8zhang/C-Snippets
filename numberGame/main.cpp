@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <time.h>
 #include <vector>
 using namespace std;
 void printMessage(string message, bool printTop = true, bool printBottom = true) {
@@ -185,6 +187,37 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
     printMessage(nTotal, false);
     return won;
 }
+string loadRandomNum(string path){
+    int lineCount = 0;
+    string numRand;
+    vector<string> v;
+    ifstream reader("numbers.txt");
+    if(reader.is_open()){
+        while(getline(reader, numRand))
+            v.push_back(numRand);
+        int randomLine = rand() % v.size();
+        numRand = v.at(randomLine);
+        reader.close();
+    }
+    return numRand;
+}
+
+string loadRandomSymbol(string path){
+    int lineCount = 0;
+    string symbol;
+    vector<string> v;
+    ifstream reader("symbols.txt");
+    if(reader.is_open()){
+        while(getline(reader, symbol))
+            v.push_back(symbol);
+        int randomLine = rand() % v.size();
+        symbol = v.at(randomLine);
+        reader.close();
+    }
+    return symbol;
+}
+
+
 
 int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
