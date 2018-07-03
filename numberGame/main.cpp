@@ -91,7 +91,7 @@ void printSymbols(){
     symbol += "-  ";
     symbol += "x  ";
     symbol += "/  ";
-    printMessage(symbol, false, false);
+    printMessage(symbol, false);
 }
 /** blanks out incorrect digits guessed*/
 void printAvailableDigits(char taken[]){
@@ -188,10 +188,9 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
     return won;
 }
 string loadRandomNum(string path){
-    int lineCount = 0;
     string numRand;
     vector<string> v;
-    ifstream reader("numbers.txt");
+    ifstream reader(path);
     if(reader.is_open()){
         while(getline(reader, numRand))
             v.push_back(numRand);
@@ -203,21 +202,18 @@ string loadRandomNum(string path){
 }
 
 string loadRandomSymbol(string path){
-    int lineCount = 0;
     string symbol;
     vector<string> v;
-    ifstream reader("symbols.txt");
-    if(reader.is_open()){
-        while(getline(reader, symbol))
+    ifstream symbolReader(path);
+    if(symbolReader.is_open()){
+        while(getline(symbolReader, symbol))
             v.push_back(symbol);
         int randomLine = rand() % v.size();
         symbol = v.at(randomLine);
-        reader.close();
+        symbolReader.close();
     }
     return symbol;
 }
-
-
 
 int triesLeft(char guess[], string numToGuess1, string numToGuess2, string numToGuessTotal, char symbolToGuess){
     int error = 0;
@@ -279,16 +275,12 @@ int calculateTotal(int num1, int num2, char symbol){
 // then stick all the information to figure out wins
 
 int main() {
-    char temp[] = "12x";
+    srand(time(0));
     vector<char> guessVector;
-
-
-    string numToGuess1, numToGuess2, numtoGuessTotal;
-    char symbolToGuess = 'x';
-    numToGuess1 = to_string(123);
-    numToGuess2 = to_string(2);
-    numtoGuessTotal = to_string(calculateTotal(stoi(numToGuess1), stoi(numToGuess2), symbolToGuess));
-
+    string numToGuess1 = loadRandomNum("numbers.txt");
+    string numToGuess2 = loadRandomNum("numbers.txt");
+    char symbolToGuess = loadRandomSymbol("symbols.txt")[0];
+    string numtoGuessTotal = to_string(calculateTotal(stoi(numToGuess1), stoi(numToGuess2), symbolToGuess));
     int tries = 0;
     bool win = false;
     do{
@@ -298,9 +290,7 @@ int main() {
         printAvailableDigits(&guessVector[0]);
         printMessage("Guess the Math");
         printSymbols();
-       // win = printNumbersSymbolsAndCheckWin(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
-
-        win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
+        win = printNumbersSymbolsAndCheckWin(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
         if(win)
             break;
         char x;
