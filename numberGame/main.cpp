@@ -105,7 +105,10 @@ bool printNumbersSymbolsAndCheckWin(char guess[], string numToGuess1, string num
     bool symbolGuessed = false;
     bool spaceDigit = false;
     bool spaceSymbol = false;
-    string n1, n2, nArithmetics, nTotal;
+    string n1 = "num1: ";
+    string n2 = "num2: ";
+    string nArithmetics = "symbol: ";
+    string nTotal = "total: ";
     if(guess==nullptr){
         won = false;
         return won;
