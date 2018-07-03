@@ -44,21 +44,13 @@ void drawHangman(int guessCount = 0) {
         printMessage("o", false, false);
     else
         printMessage("", false, false);
-    if (guessCount == 4)
-        printMessage("/  ", false, false); // interesting way to draw the hangman
-    if (guessCount == 5)
-        printMessage("/|  ", false, false); // extra spacing needed for centering
-    if (guessCount >= 6)
+    if (guessCount >= 4)
         printMessage("/|\\", false, false);
     else
         printMessage("", false, false);
-    if (guessCount >= 7)
-        printMessage("|", false, false);
-    else
-        printMessage("", false, false);
-    if (guessCount == 8)
+    if (guessCount == 5)
         printMessage("/  ", false, false);
-    if (guessCount >= 9)
+    if (guessCount >= 6)
         printMessage("/ \\", false, false);
     else
         printMessage("", false, false);
@@ -271,12 +263,11 @@ int main() {
         printMessage("HANGMAN");
         drawHangman(tries);
         printAvailableDigits(&guessVector[0]);
-
         printMessage("Guess the Math");
         printSymbols();
        // win = printNumbersSymbolsAndCheckWin(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
 
-        //win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
+        win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
         if(win)
             break;
         char x;
@@ -290,7 +281,7 @@ int main() {
         tries = triesLeft(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
 
 
-    }while(tries < 10);
+    }while(tries < 7);
 
     if(win)
         printMessage("YOU WON");
