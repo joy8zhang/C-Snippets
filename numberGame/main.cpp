@@ -82,7 +82,7 @@ void printDigits(char input[], int from, int to){
             s += to_string(i);
             s += " ";
         }
-        else if(!strchr(input, i)){
+        else if(string(input).find(to_string(i)) == string::npos){
             s += to_string(i);
             s += " ";
         }else
@@ -283,13 +283,15 @@ int main() {
         system("clear");
         printMessage("HANGMAN");
         drawHangman(tries);
-        printAvailableDigits(&guessVector[0]);
+        //printAvailableDigits(&guessVector[0]);
+        //printAvailableDigits("123");
+        printDigits("123",0,9);
+
         printMessage("Guess the Math");
         printSymbols();
        // win = printNumbersSymbolsAndCheckWin(&guessVector[0], numToGuess1, numToGuess2, numtoGuessTotal, symbolToGuess);
 
-        win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
-
+        //win = printNumbersSymbolsAndCheckWin(&guessVector[0], "123", "2", "125", 'x');
         if(win)
             break;
         char x;
